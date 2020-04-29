@@ -1,20 +1,24 @@
 ﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
 namespace CSV.Formatter
 {
-    public class CsvRecordsWriter : ICsvRecordsWriter
+    public class CsvTimelogsWriter : ICsvTimelogsWriter
     {
-        public void WriteFormattedRecords(string fileLocation, List<Timelog> recordsToBeWritten)
+        public void WriteFormattedTimelogs(string fileLocation, List<Timelog> timelogsToBeWritten)
         {
+            Console.WriteLine(fileLocation);
+            Console.ReadKey();
+
             using (var writer = new StreamWriter(fileLocation))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
-                foreach (var record in recordsToBeWritten)
+                foreach (var timelog in timelogsToBeWritten)
                 {
-                    csv.WriteRecord(record);
+                    csv.WriteRecord(timelog);
                     csv.NextRecord();
                 }
 

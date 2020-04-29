@@ -4,21 +4,21 @@ using System.IO;
 
 namespace CSV.Formatter
 {
-    public class ReportFormatter : IReportFormatter
+    public class RedmineCsvFormatter : IRedmineCsvFormatter
     {
-        private readonly CsvRecordsFormatter recordsFormatter;
-        private readonly CsvRecordsWriter recordsWriter;
+        private readonly CsvTimelogsFormatter timelogsFormatter;
+        private readonly CsvTimelogsWriter timelogsWriter;
         private readonly string currentDirectory = Directory.GetCurrentDirectory();
         private readonly string filePath;
 
-        public ReportFormatter()
+        public RedmineCsvFormatter()
         {
-            recordsFormatter = new CsvRecordsFormatter();
-            recordsWriter = new CsvRecordsWriter();
+            timelogsFormatter = new CsvTimelogsFormatter();
+            timelogsWriter = new CsvTimelogsWriter();
             filePath = Path.Combine(currentDirectory, "timelog.csv");
         }
 
-        public void FormatReport()
+        public void FormatMonthlyReport()
         {
             string previousDate = null;
 
@@ -27,12 +27,12 @@ namespace CSV.Formatter
             {
                 csv.Configuration.HeaderValidated = null;
                 csv.Configuration.MissingFieldFound = null;
-                var records = csv.GetRecords<Timelog>();
+                var timelogs = csv.GetRecords<Timelog>();
 
-                recordsFormatter.FormatEachRecord(records, previousDate);
+                timelogsFormatter.FormatEachTimelog(timelogs, previousDate);
             }
 
-            recordsWriter.WriteFormattedRecords(Path.Combine(currentDirectory, "result.csv"), recordsFormatter.RecordsToBeWritten);
+            timelogsWriter.WriteFormattedTimelogs(Path.Combine(currentDirectory, "result.csv"), timelogsFormatter.TimelogsToBeWritten);
         }
     }
 }

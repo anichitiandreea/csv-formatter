@@ -4,8 +4,8 @@
     {
         static void Main()
         {
-            var reportFormatter = new ReportFormatter();
-            reportFormatter.FormatReport();
+            var redmineCsvFormatter = new RedmineCsvFormatter();
+            redmineCsvFormatter.FormatMonthlyReport();
         }
     }
 }
