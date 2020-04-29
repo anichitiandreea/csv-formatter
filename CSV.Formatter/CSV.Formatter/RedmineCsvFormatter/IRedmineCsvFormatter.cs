@@ -1,7 +1,9 @@
-﻿namespace CSV.Formatter
+﻿using System.Threading.Tasks;
+
+namespace CSV.Formatter
 {
     public interface IRedmineCsvFormatter
     {
-        void FormatMonthlyReport();
+        Task FormatMonthlyReportAsync();
     }
 }

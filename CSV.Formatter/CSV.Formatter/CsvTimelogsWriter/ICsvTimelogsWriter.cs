@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CSV.Formatter
 {
     public interface ICsvTimelogsWriter
     {
-        void WriteFormattedTimelogs(string fileLocation, List<Timelog> recordsToBeWritten);
+        Task WriteFormattedTimelogsAsync(string fileLocation, List<Timelog> recordsToBeWritten);
     }
 }

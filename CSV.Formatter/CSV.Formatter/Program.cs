@@ -1,11 +1,14 @@
-﻿namespace CSV.Formatter
+﻿using System.Threading.Tasks;
+
+namespace CSV.Formatter
 {
     class Program
     {
-        static void Main()
+        static async Task Main()
         {
+
             var redmineCsvFormatter = new RedmineCsvFormatter();
-            redmineCsvFormatter.FormatMonthlyReport();
+            await redmineCsvFormatter.FormatMonthlyReportAsync();
         }
     }
 }

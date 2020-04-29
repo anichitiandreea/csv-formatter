@@ -3,27 +3,28 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace CSV.Formatter
 {
     public class CsvTimelogsWriter : ICsvTimelogsWriter
     {
-        public void WriteFormattedTimelogs(string fileLocation, List<Timelog> timelogsToBeWritten)
+        public async Task WriteFormattedTimelogsAsync(string fileLocation, List<Timelog> timelogsToBeWritten)
         {
-            Console.WriteLine(fileLocation);
-            Console.ReadKey();
-
             using (var writer = new StreamWriter(fileLocation))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
                 foreach (var timelog in timelogsToBeWritten)
                 {
                     csv.WriteRecord(timelog);
-                    csv.NextRecord();
+                    await csv.NextRecordAsync();
                 }
 
                 writer.Flush();
             }
+
+            Console.WriteLine(fileLocation);
+            Console.ReadKey();
         }
     }
 }
